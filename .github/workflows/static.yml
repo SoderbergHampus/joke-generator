@@ -28,22 +28,20 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./client
+    # defaults:
+    #   run:
+    #     working-directory: ./client
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          path: '../'
       - name: Set up node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           # cache: 'npm'
-      - run: npm install
-      - run: npm run test
-      - run: npm run build
+      - run: cd client && npm install
+      - run: cd client && npm run test
+      - run: cd client && npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - run: pwd && ls
@@ -51,7 +49,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: './client/dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
