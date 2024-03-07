@@ -45,6 +45,8 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - run: pwd && ls
+      - name: asset content
+        run: cd client/dist/assets
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
